@@ -7,27 +7,15 @@
     android:background="#212121"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#212121"
+    <com.example.tetris.MainCanvas
+        android:id="@+id/canvas"
+        android:layout_width="200dp"
+        android:layout_height="400dp"
+        android:background="#000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.308"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity">
-
-        <com.example.tetris.MainCanvas
-            android:id="@+id/canvas"
-            android:layout_width="200dp"
-            android:layout_height="400dp"
-            android:background="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.274"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonDown"
@@ -40,8 +28,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.284"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.534"
+        app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintVertical_bias="0.643"
         app:srcCompat="@drawable/down_arrow" />
 
     <ImageButton
@@ -53,8 +41,7 @@
         android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.361"
+        app:layout_constraintTop_toBottomOf="@+id/canvas"
         app:srcCompat="@drawable/left_arrow" />
 
     <ImageButton
@@ -67,8 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.361"
+        app:layout_constraintTop_toBottomOf="@+id/canvas"
         app:srcCompat="@drawable/right_arrow" />
 
     <Button
@@ -81,7 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageButtonLeft2"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintTop_toBottomOf="@+id/canvas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
