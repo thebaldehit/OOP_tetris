@@ -9,4 +9,5 @@ class Zka : Figure() {
         arrayOf(0, 0, 0)
     )
     override val color: Int = Color.WHITE
+    override val startPos: Int = 4
 }

@@ -10,4 +10,5 @@ class Stick : Figure() {
         arrayOf(0, 0, 0, 0)
     )
     override val color: Int = Color.RED
+    override val startPos: Int = 5
 }

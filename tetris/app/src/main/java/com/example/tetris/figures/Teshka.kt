@@ -8,4 +8,5 @@ class Teshka : Figure() {
         arrayOf(0, 0, 0)
     )
     override val color: Int = Color.CYAN
+    override val startPos: Int = 4
 }

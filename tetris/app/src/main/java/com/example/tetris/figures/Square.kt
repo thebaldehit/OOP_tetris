@@ -8,4 +8,5 @@ class Square : Figure() {
         arrayOf(1, 1)
     )
     override val color: Int = Color.GREEN
+    override val startPos: Int = 4
 }
