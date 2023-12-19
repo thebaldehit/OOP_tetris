@@ -18,4 +18,5 @@ object Constance {
         6 to { Zka() },
         7 to { Teshka() }
     )
+    const val FIELD_ROWS = 20
 }

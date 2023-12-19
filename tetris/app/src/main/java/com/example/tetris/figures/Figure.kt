@@ -4,6 +4,7 @@ open class Figure() {
     open val figureShape: Array<Array<Int>> = arrayOf()
     open val color: Int = 0
     open val startPos: Int = 0
+    var currentRow = 0
 
     open fun rotate() {
 
