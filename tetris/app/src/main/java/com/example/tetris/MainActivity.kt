@@ -13,7 +13,22 @@ class MainActivity : AppCompatActivity() {
 
         val game = Game()
         game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
-
         game.startGame()
+
+        bindingClass.imageButtonLeft.setOnClickListener {
+            game.moveFigureLeft()
+        }
+
+        bindingClass.imageButtonRight.setOnClickListener {
+            game.moveFigureRight()
+        }
+
+        bindingClass.imageButtonDown.setOnClickListener {
+            game.moveFigureDown()
+        }
+
+        bindingClass.buttonRotate.setOnClickListener {
+            game.rotateFigure()
+        }
     }
 }

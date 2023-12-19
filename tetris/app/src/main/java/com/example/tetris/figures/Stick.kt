@@ -3,12 +3,22 @@ package com.example.tetris.figures
 import android.graphics.Color
 
 class Stick : Figure() {
-    override val figureShape: Array<Array<Int>> = arrayOf(
-        arrayOf(0, 0, 0, 0),
-        arrayOf(1, 1, 1, 1),
-        arrayOf(0, 0, 0, 0),
-        arrayOf(0, 0, 0, 0)
+    override var figureShape: Array<Array<Int>> = arrayOf(
+        arrayOf(0, 0, 1, 0),
+        arrayOf(0, 0, 1, 0),
+        arrayOf(0, 0, 1, 0),
+        arrayOf(0, 0, 1, 0)
     )
     override val color: Int = Color.RED
-    override val startPos: Int = 5
+    override var startPos: Int = 5
+
+    override fun rotate() {
+        val res = Array(4) { Array(4) { 0 } }
+        for (row in figureShape.indices) {
+            for (col in figureShape[row].indices) {
+                res[col][row] = figureShape[row][col]
+            }
+        }
+        figureShape = res
+    }
 }
