@@ -7,6 +7,6 @@ class Teshka : Figure() {
         arrayOf(1, 1, 1),
         arrayOf(0, 0, 0)
     )
-    override val color: Int = Color.CYAN
+    override val color: Int = Color.rgb(235, 223, 14)
     override var startPos: Int = 4
 }

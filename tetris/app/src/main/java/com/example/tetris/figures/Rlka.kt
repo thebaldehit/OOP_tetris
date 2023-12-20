@@ -8,6 +8,6 @@ class Rlka : Figure() {
         arrayOf(1, 1, 1),
         arrayOf(0, 0, 0)
     )
-    override val color: Int = Color.BLUE
+    override val color: Int = Color.rgb(7, 148, 18)
     override var startPos: Int = 4
 }

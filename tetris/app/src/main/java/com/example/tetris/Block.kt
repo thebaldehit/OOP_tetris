@@ -1,8 +1,9 @@
 package com.example.tetris
 
-class Block(color: Int) {
+class Block(setColor: Int) {
     var isMove = true
+    var color: Int = 0
     init {
-        val color = color
+        color = setColor
     }
 }

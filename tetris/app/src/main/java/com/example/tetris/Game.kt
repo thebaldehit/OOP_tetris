@@ -89,9 +89,7 @@ class Game {
                     val curY = figure.currentRow + row
                     val curX = figure.startPos + col
                     if (!isBlockXExist(curX) || !isBlockYExist(curY) || gameField[curY][curX] != null) {
-                        figure.rotate()
-                        figure.rotate()
-                        figure.rotate()
+                        for (i in 0..2) figure.rotate()
                     }
                 }
             }
@@ -198,7 +196,7 @@ class Game {
         thread {
             while (isGame) {
                 invalidateCanvas(gameField)
-                TimeUnit.MILLISECONDS.sleep(1000)
+                TimeUnit.MILLISECONDS.sleep(300)
                 moveFigure()
             }
         }

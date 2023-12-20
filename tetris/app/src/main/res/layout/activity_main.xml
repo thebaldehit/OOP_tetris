@@ -9,8 +9,8 @@
 
     <com.example.tetris.MainCanvas
         android:id="@+id/canvas"
-        android:layout_width="200dp"
-        android:layout_height="400dp"
+        android:layout_width="250dp"
+        android:layout_height="500dp"
         android:background="#000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.308"

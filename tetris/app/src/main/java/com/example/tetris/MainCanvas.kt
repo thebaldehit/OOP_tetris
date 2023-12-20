@@ -10,7 +10,7 @@ import android.util.TypedValue
 import android.view.View
 
 class MainCanvas(context: Context, attrs: AttributeSet) : View(context, attrs) {
-    private val grid = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20f, Resources.getSystem().displayMetrics)
+    private val grid = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25f, Resources.getSystem().displayMetrics)
     private var blocks: MutableList<MutableList<Block?>> = mutableListOf()
     private val paint = Paint()
 
@@ -20,13 +20,17 @@ class MainCanvas(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
     private fun drawField(canvas: Canvas) {
-        paint.color = Color.RED
-        paint.style = Paint.Style.FILL
         var currentX = 0f
         var currentY = 0f
         for (row in blocks) {
             for (col in row) {
                 if (col != null) {
+                    paint.style = Paint.Style.FILL
+                    paint.color = col.color
+                    canvas.drawRect(currentX, currentY, currentX + grid, currentY + grid, paint)
+                    paint.style = Paint.Style.STROKE
+                    paint.strokeWidth = 10f
+                    paint.color = Color.BLACK
                     canvas.drawRect(currentX, currentY, currentX + grid, currentY + grid, paint)
                 }
                 currentX += grid
