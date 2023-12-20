@@ -18,7 +18,7 @@ object Constance {
         6 to { Zka() },
         7 to { Teshka() }
     )
-    const val FIELD_ROWS = 20
+    const val FIELD_ROWS = 23
     const val FIELD_COLS = 10
     const val RIGHT = 1
     const val LEFT = -1

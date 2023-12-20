@@ -1,6 +1,5 @@
 package com.example.tetris
 
-import android.util.Log
 import com.example.tetris.constance.Constance
 import com.example.tetris.figures.Figure
 import java.util.concurrent.TimeUnit
@@ -11,10 +10,11 @@ class Game {
     private var isGame = true
     private val gameField: MutableList<MutableList<Block?>> = mutableListOf()
     private lateinit var invalidateCanvas: (list: MutableList<MutableList<Block?>>) -> Unit
+    private lateinit var stopGame: () -> Unit
     private lateinit var figure: Figure
 
     private fun fillGameField() {
-        for (i in 0..19) {
+        for (i in 0..Constance.FIELD_ROWS) {
             val row = mutableListOf<Block?>()
             for (j in 0..9) {
                 row.add(null)
@@ -45,7 +45,6 @@ class Game {
             for (x in figure.figureShape[y].indices) {
                 if (figure.figureShape[y][x] == 1) {
                     val block = Block(figure.color)
-                    Log.d("MyTag", "${figure.currentRow + y} ${figure.startPos + x} y = $y, x = $x, startPos = ${figure.startPos}, currentRow = ${figure.currentRow}")
                     gameField[figure.currentRow + y][figure.startPos + x] = block
                 }
             }
@@ -132,8 +131,10 @@ class Game {
             figure.currentRow++
         } else {
             stopFigure()
-            getNextFigure()
-            placeFigure()
+            if (!checkGameOver()) {
+                getNextFigure()
+                placeFigure()
+            }
         }
     }
 
@@ -198,15 +199,25 @@ class Game {
             }
             if (notNullBlockCount == Constance.FIELD_COLS) {
                 gameField.removeAt(row)
-                var newRow: MutableList<Block?> = mutableListOf()
+                val newRow: MutableList<Block?> = mutableListOf()
                 for (i in 0..<Constance.FIELD_COLS) {
                     newRow.add(null)
                 }
                 gameField.add(0, newRow)
-                invalidateCanvas(gameField)
                 deleteFullRow()
             }
         }
+    }
+
+    private fun checkGameOver() : Boolean {
+        for (col in gameField[3]) {
+            if (col != null) {
+                isGame = false
+                stopGame()
+                return true
+            }
+        }
+        return false
     }
 
     fun startGame() {
@@ -225,5 +236,9 @@ class Game {
 
     fun setInvalidateCanvas(invalidateFn: (list: MutableList<MutableList<Block?>>) -> Unit) {
         invalidateCanvas = invalidateFn
+    }
+
+    fun setStopGame(fn: () -> Unit) {
+        stopGame = fn
     }
 }

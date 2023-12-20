@@ -69,4 +69,21 @@
         app:layout_constraintStart_toEndOf="@+id/imageButtonRight"
         app:layout_constraintTop_toBottomOf="@+id/canvas" />
 
+    <TextView
+        android:id="@+id/gameOver"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#0B0B0B"
+        android:gravity="center|center_vertical"
+        android:text="Game Over"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

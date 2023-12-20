@@ -22,8 +22,8 @@ class MainCanvas(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private fun drawField(canvas: Canvas) {
         var currentX = 0f
         var currentY = 0f
-        for (row in blocks) {
-            for (col in row) {
+        for (row in 3 until blocks.size) {
+            for (col in blocks[row]) {
                 if (col != null) {
                     paint.style = Paint.Style.FILL
                     paint.color = col.color

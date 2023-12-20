@@ -2,6 +2,7 @@ package com.example.tetris
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.tetris.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         val game = Game()
         game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
+        game.setStopGame(::stopGame)
         game.startGame()
 
         bindingClass.imageButtonLeft.setOnClickListener {
@@ -29,6 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         bindingClass.buttonRotate.setOnClickListener {
             game.rotateFigure()
+        }
+    }
+
+    fun stopGame() {
+        runOnUiThread {
+            bindingClass.gameOver.visibility = View.VISIBLE
         }
     }
 }
