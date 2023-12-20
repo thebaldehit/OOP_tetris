@@ -45,13 +45,14 @@ class Game {
             for (x in figure.figureShape[y].indices) {
                 if (figure.figureShape[y][x] == 1) {
                     val block = Block(figure.color)
+                    Log.d("MyTag", "${figure.currentRow + y} ${figure.startPos + x} y = $y, x = $x, startPos = ${figure.startPos}, currentRow = ${figure.currentRow}")
                     gameField[figure.currentRow + y][figure.startPos + x] = block
                 }
             }
         }
     }
 
-    private fun canFigureFall() : Boolean{
+    private fun canFigureFall() : Boolean {
         for (row in gameField.indices) {
             for (col in gameField[row].indices) {
                 val block = gameField[row][col]
@@ -189,6 +190,25 @@ class Game {
         invalidateCanvas(gameField)
     }
 
+    private fun deleteFullRow() {
+        for (row in gameField.size - 1 downTo 0) {
+            var notNullBlockCount = 0
+            for (col in gameField[row].indices) {
+                if (gameField[row][col] != null) notNullBlockCount++
+            }
+            if (notNullBlockCount == Constance.FIELD_COLS) {
+                gameField.removeAt(row)
+                var newRow: MutableList<Block?> = mutableListOf()
+                for (i in 0..<Constance.FIELD_COLS) {
+                    newRow.add(null)
+                }
+                gameField.add(0, newRow)
+                invalidateCanvas(gameField)
+                deleteFullRow()
+            }
+        }
+    }
+
     fun startGame() {
         fillGameField()
         getNextFigure()
@@ -198,6 +218,7 @@ class Game {
                 invalidateCanvas(gameField)
                 TimeUnit.MILLISECONDS.sleep(300)
                 moveFigure()
+                deleteFullRow()
             }
         }
     }
