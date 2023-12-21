@@ -9,12 +9,16 @@ import kotlin.random.Random
 class Game {
     private var isGame = true
     private var score = 0
+    private var rows = 0
     private var rowCollected = 0
+
     private val gameField: MutableList<MutableList<Block?>> = mutableListOf()
+    private lateinit var figure: Figure
+
     private lateinit var invalidateCanvas: (list: MutableList<MutableList<Block?>>) -> Unit
     private lateinit var changeScoreView: (score: Int) -> Unit
+    private lateinit var changeRowsView: (rows: Int) -> Unit
     private lateinit var stopGame: () -> Unit
-    private lateinit var figure: Figure
 
     private fun fillGameField() {
         for (i in 0..Constance.FIELD_ROWS) {
@@ -229,8 +233,14 @@ class Game {
     private fun addScore() {
         if (rowCollected == 0) return
         score += Constance.ROWS_COST[rowCollected]!!
+        addRows(rowCollected)
         rowCollected = 0
         changeScoreView(score)
+    }
+
+    private fun addRows(addRows: Int) {
+        rows += addRows
+        changeRowsView(rows)
     }
 
     fun startGame() {
@@ -250,8 +260,12 @@ class Game {
         invalidateCanvas = invalidateFn
     }
 
-    fun setAddScore(fn: (score: Int) -> Unit) {
+    fun setChangeScore(fn: (score: Int) -> Unit) {
         changeScoreView = fn
+    }
+
+    fun setChangeRows(fn: (rows: Int) -> Unit) {
+        changeRowsView = fn
     }
 
     fun setStopGame(fn: () -> Unit) {

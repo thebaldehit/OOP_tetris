@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         val game = Game()
         game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
         game.setStopGame(::stopGame)
-        game.setAddScore(::addScore)
+        game.setChangeScore(::addScore)
+        game.setChangeRows(::addRows)
         game.startGame()
 
         bindingClass.imageButtonLeft.setOnClickListener {
@@ -43,5 +44,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addScore(score: Int) {
         bindingClass.score.text = score.toString()
+    }
+
+    private fun addRows(rows: Int) {
+        bindingClass.rows.text = rows.toString()
     }
 }
