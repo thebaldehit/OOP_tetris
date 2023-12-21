@@ -1,13 +1,20 @@
 package com.example.tetris
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import com.example.tetris.databinding.ActivityMainBinding
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass : ActivityMainBinding
+    private var lButtonPressed = false
+    private var rButtonPressed = false
+    private var dButtonPressed = false
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
@@ -24,15 +31,71 @@ class MainActivity : AppCompatActivity() {
         game.initGame()
         game.startGame()
 
-        bindingClass.imageButtonLeft.setOnClickListener { game.moveFigureLeft() }
-        bindingClass.imageButtonRight.setOnClickListener { game.moveFigureRight() }
-        bindingClass.imageButtonDown.setOnClickListener { game.moveFigureDown() }
+        bindingClass.imageButtonLeft.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    if (!rButtonPressed) lButtonPressed = true
+                    thread {
+                        while (lButtonPressed) {
+                            game.moveFigureLeft()
+                            TimeUnit.MILLISECONDS.sleep(100)
+                        }
+                    }
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    lButtonPressed = false
+                    true
+                }
+                else -> false
+            }
+        }
+
+        bindingClass.imageButtonRight.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    if (!lButtonPressed) rButtonPressed = true
+                    thread {
+                        while (rButtonPressed) {
+                            game.moveFigureRight()
+                            TimeUnit.MILLISECONDS.sleep(100)
+                        }
+                    }
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    rButtonPressed = false
+                    true
+                }
+                else -> false
+            }
+        }
+
+        bindingClass.imageButtonDown.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    dButtonPressed = true
+                    thread {
+                        while (dButtonPressed) {
+                            game.moveFigureDown()
+                            TimeUnit.MILLISECONDS.sleep(50)
+                        }
+                    }
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    dButtonPressed = false
+                    true
+                }
+                else -> false
+            }
+        }
+
         bindingClass.buttonRotate.setOnClickListener { game.rotateFigure() }
         bindingClass.gameOver.setOnClickListener {
             game.restartGame()
             it.visibility = View.GONE
         }
-
     }
 
     private fun stopGame(score: Int) {

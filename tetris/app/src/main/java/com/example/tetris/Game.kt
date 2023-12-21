@@ -274,7 +274,7 @@ class Game {
         thread {
             while (isGame) {
                 invalidateCanvas(gameField)
-                TimeUnit.MILLISECONDS.sleep(100)
+                TimeUnit.MILLISECONDS.sleep(500)
                 moveFigure()
             }
         }
