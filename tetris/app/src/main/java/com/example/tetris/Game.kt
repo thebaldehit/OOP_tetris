@@ -11,6 +11,7 @@ class Game {
     private var score = 0
     private var rows = 0
     private var rowCollected = 0
+    private var speed: Long = 500
 
     private var gameField: MutableList<MutableList<Block?>> = mutableListOf()
     private lateinit var figure: Figure
@@ -254,6 +255,7 @@ class Game {
 
     private fun addRows(addRows: Int) {
         rows += addRows
+        if (rows % 10 == 0) increaseSpeed()
         changeRowsView(rows)
     }
 
@@ -274,7 +276,7 @@ class Game {
         thread {
             while (isGame) {
                 invalidateCanvas(gameField)
-                TimeUnit.MILLISECONDS.sleep(500)
+                TimeUnit.MILLISECONDS.sleep(speed)
                 moveFigure()
             }
         }
@@ -292,6 +294,11 @@ class Game {
         rowCollected = 0
         rows = 0
         score = 0
+    }
+
+    private fun increaseSpeed() {
+        val newSpeed = speed * 0.7
+        speed = newSpeed.toLong()
     }
 
     fun restartGame() {
