@@ -14,10 +14,12 @@ class Game {
 
     private val gameField: MutableList<MutableList<Block?>> = mutableListOf()
     private lateinit var figure: Figure
+    private lateinit var nextFigure: Figure
 
     private lateinit var invalidateCanvas: (list: MutableList<MutableList<Block?>>) -> Unit
     private lateinit var changeScoreView: (score: Int) -> Unit
     private lateinit var changeRowsView: (rows: Int) -> Unit
+    private lateinit var changeNextFigureView: (list: MutableList<MutableList<Block?>>) -> Unit
     private lateinit var stopGame: () -> Unit
 
     private fun fillGameField() {
@@ -30,10 +32,22 @@ class Game {
         }
     }
 
-    private fun getNextFigure() {
+    private fun generateStartFigures() {
+        var randomNumber = Random.nextInt(7) + 1
+        var figureConstructor = Constance.FIGURE_CONSTRUCTORS[randomNumber]
+        nextFigure = figureConstructor!!.invoke()
+        randomNumber = Random.nextInt(7) + 1
+        figureConstructor = Constance.FIGURE_CONSTRUCTORS[randomNumber]
+        figure = figureConstructor!!.invoke()
+        showNextFigure()
+    }
+
+    private fun generateNextFigure() {
+        figure = nextFigure
         val randomNumber = Random.nextInt(7) + 1
         val figureConstructor = Constance.FIGURE_CONSTRUCTORS[randomNumber]
-        figure = figureConstructor!!.invoke()
+        nextFigure = figureConstructor!!.invoke()
+        showNextFigure()
     }
 
     private fun clearFigure() {
@@ -141,7 +155,7 @@ class Game {
             deleteFullRow()
             addScore()
             if (!checkGameOver()) {
-                getNextFigure()
+                generateNextFigure()
                 placeFigure()
             }
         }
@@ -243,9 +257,22 @@ class Game {
         changeRowsView(rows)
     }
 
+    private fun showNextFigure() {
+        val blocks: MutableList<MutableList<Block?>> = mutableListOf()
+        for (row in nextFigure.figureShape) {
+            val blocksRow = mutableListOf<Block?>()
+            for (col in row) {
+                if (col == 1) blocksRow.add(Block(nextFigure.color))
+                else blocksRow.add(null)
+            }
+            blocks.add(blocksRow)
+        }
+        changeNextFigureView(blocks)
+    }
+
     fun startGame() {
         fillGameField()
-        getNextFigure()
+        generateStartFigures()
         placeFigure()
         thread {
             while (isGame) {
@@ -258,6 +285,10 @@ class Game {
 
     fun setInvalidateCanvas(invalidateFn: (list: MutableList<MutableList<Block?>>) -> Unit) {
         invalidateCanvas = invalidateFn
+    }
+
+    fun setChangeNextFigure(fn: (list: MutableList<MutableList<Block?>>) -> Unit) {
+        changeNextFigureView = fn
     }
 
     fun setChangeScore(fn: (score: Int) -> Unit) {

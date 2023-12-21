@@ -12,8 +12,11 @@ class MainActivity : AppCompatActivity() {
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bindingClass.root)
 
+        bindingClass.canvas.setStartRow(3)
+
         val game = Game()
         game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
+        game.setChangeNextFigure(bindingClass.nextFigureCanvas::invalidateCanvas)
         game.setStopGame(::stopGame)
         game.setChangeScore(::addScore)
         game.setChangeRows(::addRows)

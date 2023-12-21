@@ -1,5 +1,7 @@
 package com.example.tetris.constance
 
+import android.content.res.Resources
+import android.util.TypedValue
 import com.example.tetris.figures.Lka
 import com.example.tetris.figures.Rlka
 import com.example.tetris.figures.Ska
@@ -28,4 +30,5 @@ object Constance {
     const val FIELD_COLS = 10
     const val RIGHT = 1
     const val LEFT = -1
+    val GRID = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25f, Resources.getSystem().displayMetrics)
 }
