@@ -294,6 +294,7 @@ class Game {
         rowCollected = 0
         rows = 0
         score = 0
+        speed = 500
     }
 
     private fun increaseSpeed() {

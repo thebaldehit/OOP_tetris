@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var lButtonPressed = false
     private var rButtonPressed = false
     private var dButtonPressed = false
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopGame(score: Int) {
         runOnUiThread {
-            bindingClass.gameOver.text = "${bindingClass.gameOver.text}\nScore: $score\nPress to restart"
+            bindingClass.gameOver.text = "Game Over\nScore: $score\nClick to restart"
             bindingClass.gameOver.visibility = View.VISIBLE
         }
     }

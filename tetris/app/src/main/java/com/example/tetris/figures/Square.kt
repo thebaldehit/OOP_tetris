@@ -9,4 +9,8 @@ class Square : Figure() {
     )
     override val color: Int = Color.rgb(184, 27, 11)
     override var startPos: Int = 4
+
+    override fun rotate() {
+        return
+    }
 }
