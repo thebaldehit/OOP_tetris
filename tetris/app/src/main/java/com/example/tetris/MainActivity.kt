@@ -2,6 +2,7 @@ package com.example.tetris
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.tetris.databinding.ActivityMainBinding
 
@@ -20,27 +21,23 @@ class MainActivity : AppCompatActivity() {
         game.setStopGame(::stopGame)
         game.setChangeScore(::addScore)
         game.setChangeRows(::addRows)
+        game.initGame()
         game.startGame()
 
-        bindingClass.imageButtonLeft.setOnClickListener {
-            game.moveFigureLeft()
+        bindingClass.imageButtonLeft.setOnClickListener { game.moveFigureLeft() }
+        bindingClass.imageButtonRight.setOnClickListener { game.moveFigureRight() }
+        bindingClass.imageButtonDown.setOnClickListener { game.moveFigureDown() }
+        bindingClass.buttonRotate.setOnClickListener { game.rotateFigure() }
+        bindingClass.gameOver.setOnClickListener {
+            game.restartGame()
+            it.visibility = View.GONE
         }
 
-        bindingClass.imageButtonRight.setOnClickListener {
-            game.moveFigureRight()
-        }
-
-        bindingClass.imageButtonDown.setOnClickListener {
-            game.moveFigureDown()
-        }
-
-        bindingClass.buttonRotate.setOnClickListener {
-            game.rotateFigure()
-        }
     }
 
-    private fun stopGame() {
+    private fun stopGame(score: Int) {
         runOnUiThread {
+            bindingClass.gameOver.text = "${bindingClass.gameOver.text}\nScore: $score\nPress to restart"
             bindingClass.gameOver.visibility = View.VISIBLE
         }
     }
