@@ -31,55 +31,58 @@
 
     <ImageButton
         android:id="@+id/imageButtonDown"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#000"
         android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
-        app:layout_constraintVertical_bias="0.643"
+        app:layout_constraintVertical_bias="0.614"
         app:srcCompat="@drawable/down_arrow" />
 
     <ImageButton
         android:id="@+id/imageButtonLeft"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="32dp"
         android:backgroundTint="#000"
         android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintVertical_bias="0.205"
         app:srcCompat="@drawable/left_arrow" />
 
     <ImageButton
         android:id="@+id/imageButtonRight"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:backgroundTint="#000"
         android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintVertical_bias="0.205"
         app:srcCompat="@drawable/right_arrow" />
 
     <Button
         android:id="@+id/buttonRotate"
         android:layout_width="80dp"
         android:layout_height="85dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imageButtonRight"
-        app:layout_constraintTop_toBottomOf="@+id/canvas" />
+        app:layout_constraintTop_toBottomOf="@+id/canvas"
+        app:layout_constraintVertical_bias="0.321" />
 
     <TextView
         android:id="@+id/score"
