@@ -18,6 +18,12 @@ object Constance {
         6 to { Zka() },
         7 to { Teshka() }
     )
+    val ROWS_COST = mapOf(
+        1 to 100,
+        2 to 300,
+        3 to 700,
+        4 to 1500
+    )
     const val FIELD_ROWS = 23
     const val FIELD_COLS = 10
     const val RIGHT = 1

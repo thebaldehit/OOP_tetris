@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         val game = Game()
         game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
         game.setStopGame(::stopGame)
+        game.setAddScore(::addScore)
         game.startGame()
 
         bindingClass.imageButtonLeft.setOnClickListener {
@@ -34,9 +35,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun stopGame() {
+    private fun stopGame() {
         runOnUiThread {
             bindingClass.gameOver.visibility = View.VISIBLE
         }
+    }
+
+    private fun addScore(score: Int) {
+        bindingClass.score.text = score.toString()
     }
 }

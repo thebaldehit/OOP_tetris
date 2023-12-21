@@ -8,8 +8,11 @@ import kotlin.random.Random
 
 class Game {
     private var isGame = true
+    private var score = 0
+    private var rowCollected = 0
     private val gameField: MutableList<MutableList<Block?>> = mutableListOf()
     private lateinit var invalidateCanvas: (list: MutableList<MutableList<Block?>>) -> Unit
+    private lateinit var changeScoreView: (score: Int) -> Unit
     private lateinit var stopGame: () -> Unit
     private lateinit var figure: Figure
 
@@ -131,6 +134,8 @@ class Game {
             figure.currentRow++
         } else {
             stopFigure()
+            deleteFullRow()
+            addScore()
             if (!checkGameOver()) {
                 getNextFigure()
                 placeFigure()
@@ -204,6 +209,7 @@ class Game {
                     newRow.add(null)
                 }
                 gameField.add(0, newRow)
+                rowCollected++
                 deleteFullRow()
             }
         }
@@ -220,6 +226,13 @@ class Game {
         return false
     }
 
+    private fun addScore() {
+        if (rowCollected == 0) return
+        score += Constance.ROWS_COST[rowCollected]!!
+        rowCollected = 0
+        changeScoreView(score)
+    }
+
     fun startGame() {
         fillGameField()
         getNextFigure()
@@ -229,13 +242,16 @@ class Game {
                 invalidateCanvas(gameField)
                 TimeUnit.MILLISECONDS.sleep(300)
                 moveFigure()
-                deleteFullRow()
             }
         }
     }
 
     fun setInvalidateCanvas(invalidateFn: (list: MutableList<MutableList<Block?>>) -> Unit) {
         invalidateCanvas = invalidateFn
+    }
+
+    fun setAddScore(fn: (score: Int) -> Unit) {
+        changeScoreView = fn
     }
 
     fun setStopGame(fn: () -> Unit) {
