@@ -289,25 +289,9 @@ class Game {
         placeFigure()
     }
 
-    private fun setDefaultStartValue() {
-        isGame = true
-        rowCollected = 0
-        rows = 0
-        score = 0
-        speed = 500
-    }
-
     private fun increaseSpeed() {
         val newSpeed = speed * 0.7
         speed = newSpeed.toLong()
-    }
-
-    fun restartGame() {
-        initGame()
-        setDefaultStartValue()
-        changeScoreView(0)
-        changeRowsView(0)
-        startGame()
     }
 
     fun setInvalidateCanvas(invalidateFn: (list: MutableList<MutableList<Block?>>) -> Unit) {

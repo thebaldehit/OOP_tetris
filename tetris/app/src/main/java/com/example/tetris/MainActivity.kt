@@ -94,8 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         bindingClass.buttonRotate.setOnClickListener { game.rotateFigure() }
         bindingClass.gameOver.setOnClickListener {
-            game.restartGame()
-            it.visibility = View.GONE
+           finish()
         }
     }
 
