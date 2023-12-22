@@ -16,4 +16,15 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        showScore()
+    }
+
+    private fun showScore() {
+        val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
+        val userScore = sharedPreferences.getInt("score", 0)
+        bindingClass.record.text = "Your record: $userScore"
+    }
 }

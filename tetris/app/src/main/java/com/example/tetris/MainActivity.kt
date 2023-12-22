@@ -1,6 +1,7 @@
 package com.example.tetris
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -102,6 +103,17 @@ class MainActivity : AppCompatActivity() {
         runOnUiThread {
             bindingClass.gameOver.text = "Game Over\nScore: $score\nClick to restart"
             bindingClass.gameOver.visibility = View.VISIBLE
+            saveScore(score)
+        }
+    }
+
+    private fun saveScore(score: Int) {
+        val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
+        val userScore = sharedPreferences.getInt("score", 0)
+        val editor = sharedPreferences.edit()
+        if (score > userScore) {
+            editor.putInt("score", score)
+            editor.apply()
         }
     }
 
