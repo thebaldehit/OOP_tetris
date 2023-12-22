@@ -282,6 +282,15 @@ class Game {
         }
     }
 
+    fun pauseGame() {
+        isGame = false
+    }
+
+    fun resumeGame() {
+        isGame = true
+        startGame()
+    }
+
     fun initGame() {
         fillGameField()
         generateStartFigures()

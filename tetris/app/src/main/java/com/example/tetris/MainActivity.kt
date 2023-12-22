@@ -1,7 +1,6 @@
 package com.example.tetris
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -15,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var lButtonPressed = false
     private var rButtonPressed = false
     private var dButtonPressed = false
+    private var pause = false
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,11 +36,13 @@ class MainActivity : AppCompatActivity() {
         bindingClass.imageButtonLeft.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    if (!rButtonPressed) lButtonPressed = true
-                    thread {
-                        while (lButtonPressed) {
-                            game.moveFigureLeft()
-                            TimeUnit.MILLISECONDS.sleep(100)
+                    if (!pause) {
+                        if (!rButtonPressed) lButtonPressed = true
+                        thread {
+                            while (lButtonPressed) {
+                                game.moveFigureLeft()
+                                TimeUnit.MILLISECONDS.sleep(100)
+                            }
                         }
                     }
                     true
@@ -56,11 +58,13 @@ class MainActivity : AppCompatActivity() {
         bindingClass.imageButtonRight.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    if (!lButtonPressed) rButtonPressed = true
-                    thread {
-                        while (rButtonPressed) {
-                            game.moveFigureRight()
-                            TimeUnit.MILLISECONDS.sleep(100)
+                    if (!pause) {
+                        if (!lButtonPressed) rButtonPressed = true
+                        thread {
+                            while (rButtonPressed) {
+                                game.moveFigureRight()
+                                TimeUnit.MILLISECONDS.sleep(100)
+                            }
                         }
                     }
                     true
@@ -76,13 +80,15 @@ class MainActivity : AppCompatActivity() {
         bindingClass.imageButtonDown.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    dButtonPressed = true
-                    thread {
-                        while (dButtonPressed) {
-                            game.moveFigureDown()
-                            TimeUnit.MILLISECONDS.sleep(50)
-                        }
-                    }
+                   if (!pause) {
+                       dButtonPressed = true
+                       thread {
+                           while (dButtonPressed) {
+                               game.moveFigureDown()
+                               TimeUnit.MILLISECONDS.sleep(50)
+                           }
+                       }
+                   }
                     true
                 }
                 MotionEvent.ACTION_UP -> {
@@ -93,9 +99,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        bindingClass.buttonRotate.setOnClickListener { game.rotateFigure() }
+        bindingClass.buttonRotate.setOnClickListener { if (!pause) game.rotateFigure() }
         bindingClass.gameOver.setOnClickListener {
            finish()
+        }
+        bindingClass.pause.setOnClickListener {
+            pause = !pause
+            if (pause) {
+                game.pauseGame()
+                bindingClass.pauseText.visibility = View.VISIBLE
+            }
+            else {
+                game.resumeGame()
+                bindingClass.pauseText.visibility = View.GONE
+            }
         }
     }
 
