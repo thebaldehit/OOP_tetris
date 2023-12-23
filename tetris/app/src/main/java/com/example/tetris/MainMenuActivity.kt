@@ -3,7 +3,6 @@ package com.example.tetris
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.tetris.databinding.ActivityMainMenuBinding
 
 class MainMenuActivity : AppCompatActivity() {
@@ -14,6 +13,7 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(bindingClass.root)
 
         bindingClass.play.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+        bindingClass.soundMain.setOnClickListener { MusicPlayer.changeSound() }
         MusicPlayer.startMusic(this, R.raw.vstup)
     }
 

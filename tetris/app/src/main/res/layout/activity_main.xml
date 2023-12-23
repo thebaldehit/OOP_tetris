@@ -168,8 +168,20 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.772"
         app:layout_constraintStart_toEndOf="@+id/canvas"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pause" />
+
+    <ImageView
+        android:id="@+id/sound"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintStart_toEndOf="@+id/canvas"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/volume" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

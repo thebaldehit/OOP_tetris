@@ -1,10 +1,8 @@
 package com.example.tetris
 
 import android.annotation.SuppressLint
-import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.tetris.databinding.ActivityMainBinding
@@ -104,9 +102,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         bindingClass.buttonRotate.setOnClickListener { if (!pause) game.rotateFigure() }
-        bindingClass.gameOver.setOnClickListener {
-           finish()
-        }
+        bindingClass.sound.setOnClickListener { MusicPlayer.changeSound() }
+        bindingClass.gameOver.setOnClickListener { finish() }
         bindingClass.pause.setOnClickListener {
             pause = !pause
             if (pause) {

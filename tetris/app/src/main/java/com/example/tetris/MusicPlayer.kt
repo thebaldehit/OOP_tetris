@@ -5,19 +5,19 @@ import android.media.MediaPlayer
 
 object MusicPlayer {
     private var mediaPlayer: MediaPlayer? = null
+    private var sound = true
 
     fun startMusic(context: Context, resourceId: Int) {
         stopMusic()
         mediaPlayer = MediaPlayer.create(context, resourceId)
         mediaPlayer?.isLooping = true
         mediaPlayer?.start()
+        if (!sound) pauseMusic()
     }
 
     private fun stopMusic() {
         mediaPlayer?.apply {
-            if (isPlaying) {
-                stop()
-            }
+            if (isPlaying) stop()
             release()
         }
         mediaPlayer = null
@@ -28,10 +28,16 @@ object MusicPlayer {
     }
 
     fun resumeMusic() {
-        mediaPlayer?.start()
+        if (sound) mediaPlayer?.start()
     }
 
-    fun isMusicPlaying(): Boolean {
-        return mediaPlayer != null
+    fun changeSound() {
+        if (sound) {
+            sound = false
+            pauseMusic()
+        } else {
+            sound = true
+            resumeMusic()
+        }
     }
 }
