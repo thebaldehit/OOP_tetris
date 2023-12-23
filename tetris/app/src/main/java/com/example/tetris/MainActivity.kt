@@ -1,8 +1,10 @@
 package com.example.tetris
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.tetris.databinding.ActivityMainBinding
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         game.setChangeRows(::addRows)
         game.initGame()
         game.startGame()
+
+        MusicPlayer.startMusic(this, R.raw.game)
 
         bindingClass.imageButtonLeft.setOnTouchListener { _, event ->
             when (event.action) {
@@ -114,6 +118,16 @@ class MainActivity : AppCompatActivity() {
                 bindingClass.pauseText.visibility = View.GONE
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MusicPlayer.resumeMusic()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MusicPlayer.pauseMusic()
     }
 
     private fun stopGame(score: Int) {
