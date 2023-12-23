@@ -8,7 +8,7 @@ class Zka : Figure() {
         arrayOf(1, 1, 0),
         arrayOf(0, 1, 1)
     )
-    override val color: Int = Color.rgb(197, 100, 16)
+    override val color: Int = Color.rgb(250, 109, 255)
     override var startPos: Int = 4
 
     override fun rotate() {

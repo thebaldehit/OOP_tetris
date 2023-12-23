@@ -9,7 +9,7 @@ class Stick : Figure() {
         arrayOf(0, 0, 1, 0),
         arrayOf(0, 0, 1, 0)
     )
-    override val color: Int = Color.rgb(215, 45, 206)
+    override val color: Int = Color.rgb(186, 111, 255)
     override var startPos: Int = 4
 
     override fun rotate() {
