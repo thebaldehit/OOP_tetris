@@ -127,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         game.pauseGame()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun stopGame(score: Int) {
         runOnUiThread {
             bindingClass.gameOver.text = "Game Over\nScore: $score\nClick to restart"

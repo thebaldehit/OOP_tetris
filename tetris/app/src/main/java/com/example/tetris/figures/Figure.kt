@@ -1,6 +1,6 @@
 package com.example.tetris.figures
 
-open class Figure() {
+open class Figure {
     open var figureShape: Array<Array<Int>> = arrayOf()
     open val color: Int = 0
     open var startPos: Int = 0

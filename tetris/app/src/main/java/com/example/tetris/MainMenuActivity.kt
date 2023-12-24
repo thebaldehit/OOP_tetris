@@ -1,5 +1,6 @@
 package com.example.tetris
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,6 +29,7 @@ class MainMenuActivity : AppCompatActivity() {
         MusicPlayer.pauseMusic()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showScore() {
         val sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE)
         val userScore = sharedPreferences.getInt("score", 0)
