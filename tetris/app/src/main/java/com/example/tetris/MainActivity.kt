@@ -11,6 +11,7 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindingClass : ActivityMainBinding
+    private lateinit var game: Game
     private var lButtonPressed = false
     private var rButtonPressed = false
     private var dButtonPressed = false
@@ -24,12 +25,12 @@ class MainActivity : AppCompatActivity() {
 
         bindingClass.canvas.setStartRow(3)
 
-        val game = Game()
-        game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
-        game.setChangeNextFigure(bindingClass.nextFigureCanvas::invalidateCanvas)
+        game = Game()
         game.setStopGame(::stopGame)
         game.setChangeScore(::addScore)
         game.setChangeRowCount(::addRows)
+        game.setInvalidateCanvas(bindingClass.canvas::invalidateCanvas)
+        game.setChangeNextFigure(bindingClass.nextFigureCanvas::invalidateCanvas)
         game.initGame()
         game.startGame()
 
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         bindingClass.imageButtonRight.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         bindingClass.imageButtonDown.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -100,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         bindingClass.buttonRotate.setOnClickListener { if (!pause) game.rotateFigure() }
         bindingClass.sound.setOnClickListener { MusicPlayer.changeSound() }
         bindingClass.gameOver.setOnClickListener { finish() }
@@ -120,11 +118,13 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         MusicPlayer.resumeMusic()
+        game.resumeGame()
     }
 
     override fun onPause() {
         super.onPause()
         MusicPlayer.pauseMusic()
+        game.pauseGame()
     }
 
     private fun stopGame(score: Int) {
