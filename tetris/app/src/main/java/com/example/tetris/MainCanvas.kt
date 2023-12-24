@@ -24,19 +24,21 @@ class MainCanvas(context: Context, attrs: AttributeSet) : View(context, attrs) {
         for (row in startRow until blocks.size) {
             for (col in blocks[row]) {
                 if (col != null) {
-                    paint.style = Paint.Style.FILL
-                    paint.color = col.color
-                    canvas.drawRect(currentX, currentY, currentX + Constance.GRID, currentY + Constance.GRID, paint)
-                    paint.style = Paint.Style.STROKE
                     paint.strokeWidth = 10f
-                    paint.color = Color.BLACK
-                    canvas.drawRect(currentX, currentY, currentX + Constance.GRID, currentY + Constance.GRID, paint)
+                    drawRect(canvas, Paint.Style.FILL, col.color, currentX, currentY, currentX + Constance.GRID, currentY + Constance.GRID)
+                    drawRect(canvas, Paint.Style.STROKE, Color.BLACK, currentX, currentY, currentX + Constance.GRID, currentY + Constance.GRID)
                 }
                 currentX += Constance.GRID
             }
             currentX = 0f
             currentY += Constance.GRID
         }
+    }
+
+    private fun drawRect(canvas: Canvas, style: Paint.Style, color: Int, xs: Float, ys: Float, xe: Float, ye: Float) {
+        paint.style = style
+        paint.color = color
+        canvas.drawRect(xs, ys, xe, ye, paint)
     }
 
     fun setStartRow(row: Int) {
