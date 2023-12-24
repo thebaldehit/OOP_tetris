@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         game.setChangeNextFigure(bindingClass.nextFigureCanvas::invalidateCanvas)
         game.setStopGame(::stopGame)
         game.setChangeScore(::addScore)
-        game.setChangeRows(::addRows)
+        game.setChangeRowCount(::addRows)
         game.initGame()
         game.startGame()
 
